@@ -5,8 +5,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../../../calendar_view.dart';
 import '../../constants.dart';
+import '../../style/header_style.dart';
+import '../../typedefs.dart';
+import 'calendar_page_header.dart';
 
 class MonthPageHeader extends CalendarPageHeader {
   /// A header widget to display on month view.

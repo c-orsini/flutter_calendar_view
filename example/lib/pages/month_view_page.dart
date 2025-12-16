@@ -19,22 +19,13 @@ class MonthViewPageDemo extends StatefulWidget {
 class _MonthViewPageDemoState extends State<MonthViewPageDemo> {
   @override
   Widget build(BuildContext context) {
-    final appColors = context.appColors;
-
     return ResponsiveWidget(
       webWidget: WebHomePage(
         selectedView: CalendarView.month,
       ),
       mobileWidget: Scaffold(
-        primary: false,
-        appBar: AppBar(
-          leading: const SizedBox.shrink(),
-        ),
         floatingActionButton: FloatingActionButton(
-          child: Icon(
-            Icons.add,
-            color: appColors.onPrimary,
-          ),
+          child: Icon(Icons.add),
           elevation: 8,
           onPressed: () => context.pushRoute(CreateEventPage()),
         ),

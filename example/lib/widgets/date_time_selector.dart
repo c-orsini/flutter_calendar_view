@@ -75,8 +75,7 @@ class _DateTimeSelectorFormFieldState extends State<DateTimeSelectorFormField> {
       _textEditingController = widget.controller ?? TextEditingController();
     }
 
-    if (widget.initialDateTime != oldWidget.initialDateTime ||
-        _selectedDate != oldWidget.initialDateTime ||
+    if (_selectedDate != oldWidget.initialDateTime ||
         widget.minimumDateTime != oldWidget.minimumDateTime) {
       _setDates();
     }
@@ -105,7 +104,7 @@ class _DateTimeSelectorFormFieldState extends State<DateTimeSelectorFormField> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: widget.onSelect == null ? null : _showSelector,
+      onTap: _showSelector,
       child: TextFormField(
         focusNode: _focusNode,
         style: widget.textStyle,

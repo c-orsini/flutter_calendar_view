@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import 'app_colors.dart';
 import 'enumerations.dart';
-import 'theme/app_colors.dart';
-import 'theme/app_theme_extension.dart';
 
 enum TimeStampFormat { parse_12, parse_24 }
 
@@ -128,10 +127,4 @@ extension StringExt on String {
 
 extension ViewNameExt on CalendarView {
   String get name => toString().split(".").last;
-}
-
-extension BuildContextExtension on BuildContext {
-  AppThemeExtension get appColors =>
-      Theme.of(this).extension<AppThemeExtension>() ??
-      AppThemeExtension.light();
 }

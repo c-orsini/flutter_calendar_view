@@ -1,7 +1,6 @@
-import 'package:example/extension.dart';
 import 'package:flutter/material.dart';
 
-import '../theme/app_colors.dart';
+import '../app_colors.dart';
 
 class CustomButton extends StatelessWidget {
   final String title;
@@ -11,8 +10,6 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeColors = context.appColors;
-
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -21,7 +18,7 @@ class CustomButton extends StatelessWidget {
           horizontal: 40,
         ),
         decoration: BoxDecoration(
-          color: themeColors.primary,
+          color: AppColors.navyBlue,
           borderRadius: BorderRadius.circular(7.0),
           boxShadow: [
             BoxShadow(
@@ -35,7 +32,7 @@ class CustomButton extends StatelessWidget {
         child: Text(
           title,
           style: TextStyle(
-            color: themeColors.onPrimary,
+            color: AppColors.white,
             fontSize: 20,
           ),
         ),

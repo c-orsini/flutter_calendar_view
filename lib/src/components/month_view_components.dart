@@ -4,9 +4,10 @@
 
 import 'package:flutter/material.dart';
 
-import '../../calendar_view.dart';
+import '../calendar_event_data.dart';
 import '../constants.dart';
 import '../extensions.dart';
+import '../typedefs.dart';
 
 class CircularCell extends StatelessWidget {
   /// Date of cell.
@@ -79,7 +80,6 @@ class FilledCell<T extends Object?> extends StatelessWidget {
   /// Color for event tile.
   final Color tileColor;
 
-  // TODO(Shubham): Move all callbacks to separate class
   /// Called when user taps on any event tile.
   final TileTapCallback<T>? onTileTap;
 
@@ -88,15 +88,6 @@ class FilledCell<T extends Object?> extends StatelessWidget {
 
   /// Called when user double tap on any event tile.
   final TileTapCallback<T>? onTileDoubleTap;
-
-  /// Similar to [onTileTap] with additional tap details callback.
-  final TileTapDetailsCallback<T>? onTileTapDetails;
-
-  /// Similar to [onTileDoubleTap] with additional tap details callback.
-  final TileDoubleTapDetailsCallback<T>? onTileDoubleTapDetails;
-
-  /// Similar to [onTileLongTap] with additional tap details callback.
-  final TileLongTapDetailsCallback<T>? onTileLongTapDetails;
 
   /// defines that [date] is in current month or not.
   final bool isInMonth;
@@ -126,9 +117,6 @@ class FilledCell<T extends Object?> extends StatelessWidget {
     this.highlightColor = Colors.blue,
     this.onTileTap,
     this.onTileLongTap,
-    this.onTileTapDetails,
-    this.onTileDoubleTapDetails,
-    this.onTileLongTapDetails,
     this.tileColor = Colors.blue,
     this.highlightRadius = 11,
     this.titleColor = Constants.black,
@@ -172,32 +160,11 @@ class FilledCell<T extends Object?> extends StatelessWidget {
                     children: List.generate(
                       events.length,
                       (index) => GestureDetector(
-                        onTap: onTileTap.safeVoidCall(events[index], date),
-                        onLongPress:
-                            onTileLongTap.safeVoidCall(events[index], date),
-                        onDoubleTap:
-                            onTileDoubleTap.safeVoidCall(events[index], date),
-                        onTapUp: onTileTapDetails == null
-                            ? null
-                            : (details) => onTileTapDetails?.call(
-                                  events[index],
-                                  date,
-                                  details,
-                                ),
-                        onLongPressStart: onTileLongTapDetails == null
-                            ? null
-                            : (details) => onTileLongTapDetails?.call(
-                                  events[index],
-                                  date,
-                                  details,
-                                ),
-                        onDoubleTapDown: onTileDoubleTapDetails == null
-                            ? null
-                            : (details) => onTileDoubleTapDetails?.call(
-                                  events[index],
-                                  date,
-                                  details,
-                                ),
+                        onTap: () => onTileTap?.call(events[index], date),
+                        onLongPress: () =>
+                            onTileLongTap?.call(events[index], date),
+                        onDoubleTap: () =>
+                            onTileDoubleTap?.call(events[index], date),
                         child: Container(
                           decoration: BoxDecoration(
                             color: events[index].color,
@@ -236,7 +203,7 @@ class FilledCell<T extends Object?> extends StatelessWidget {
   }
 }
 
-class WeekDayTile extends StatefulWidget {
+class WeekDayTile extends StatelessWidget {
   /// Index of week day.
   final int dayIndex;
 
@@ -244,9 +211,7 @@ class WeekDayTile extends StatefulWidget {
   final String Function(int)? weekDayStringBuilder;
 
   /// Background color of single week day tile.
-  final Color? backgroundColor;
-
-  final Color? borderColor;
+  final Color backgroundColor;
 
   /// Should display border or not.
   final bool displayBorder;
@@ -258,43 +223,33 @@ class WeekDayTile extends StatefulWidget {
   const WeekDayTile({
     Key? key,
     required this.dayIndex,
-    this.backgroundColor,
-    this.borderColor,
+    this.backgroundColor = Constants.white,
     this.displayBorder = true,
     this.textStyle,
     this.weekDayStringBuilder,
   }) : super(key: key);
 
   @override
-  State<WeekDayTile> createState() => _WeekDayTileState();
-}
-
-class _WeekDayTileState extends State<WeekDayTile> {
-  @override
   Widget build(BuildContext context) {
-    final themeColors = context.monthViewColors;
-
     return Container(
       alignment: Alignment.center,
       margin: EdgeInsets.zero,
       padding: EdgeInsets.symmetric(vertical: 10.0),
       decoration: BoxDecoration(
-        color: widget.backgroundColor ?? themeColors.weekDayTileColor,
-        border: widget.displayBorder
+        color: backgroundColor,
+        border: displayBorder
             ? Border.all(
-                color: widget.borderColor ?? themeColors.weekDayBorderColor,
+                color: Constants.defaultBorderColor,
                 width: 0.5,
               )
             : null,
       ),
       child: Text(
-        widget.weekDayStringBuilder?.call(widget.dayIndex) ??
-            Constants.weekTitles[widget.dayIndex],
-        style: widget.textStyle ??
+        weekDayStringBuilder?.call(dayIndex) ?? Constants.weekTitles[dayIndex],
+        style: textStyle ??
             TextStyle(
               fontSize: 17,
-              fontWeight: FontWeight.w500,
-              color: themeColors.weekDayTextColor,
+              color: Constants.black,
             ),
       ),
     );

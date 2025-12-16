@@ -17,22 +17,13 @@ class DayViewPageDemo extends StatefulWidget {
 class _DayViewPageDemoState extends State<DayViewPageDemo> {
   @override
   Widget build(BuildContext context) {
-    final appColors = context.appColors;
-
     return ResponsiveWidget(
       webWidget: WebHomePage(
         selectedView: CalendarView.day,
       ),
       mobileWidget: Scaffold(
-        primary: false,
-        appBar: AppBar(
-          leading: const SizedBox.shrink(),
-        ),
         floatingActionButton: FloatingActionButton(
-          child: Icon(
-            Icons.add,
-            color: appColors.onPrimary,
-          ),
+          child: Icon(Icons.add),
           elevation: 8,
           onPressed: () => context.pushRoute(CreateEventPage()),
         ),

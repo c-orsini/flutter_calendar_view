@@ -24,7 +24,6 @@ class DayViewWidget extends StatelessWidget {
       timeLineBuilder: _timeLineBuilder,
       scrollPhysics: const BouncingScrollPhysics(),
       eventArranger: SideEventArranger(maxWidth: 30),
-      showQuarterHours: false,
       hourIndicatorSettings: HourIndicatorSettings(
         color: Theme.of(context).dividerColor,
       ),
@@ -49,10 +48,7 @@ class DayViewWidget extends StatelessWidget {
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       },
       halfHourIndicatorSettings: HourIndicatorSettings(
-        color: CalendarThemeProvider.of(context)
-            .calendarTheme
-            .dayViewTheme
-            .hourLineColor,
+        color: Theme.of(context).dividerColor,
         lineStyle: LineStyle.dashed,
       ),
       verticalLineOffset: 0,
@@ -79,7 +75,7 @@ class DayViewWidget extends StatelessWidget {
               "${date.hour}:${date.minute}",
               textAlign: TextAlign.right,
               style: TextStyle(
-                color: Colors.grey,
+                color: Colors.black.withAlpha(50),
                 fontStyle: FontStyle.italic,
                 fontSize: 12,
               ),

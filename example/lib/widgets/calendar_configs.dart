@@ -1,34 +1,23 @@
 import 'package:calendar_view/calendar_view.dart';
 import 'package:flutter/material.dart';
 
+import '../app_colors.dart';
 import '../enumerations.dart';
 import '../extension.dart';
-import '../theme/app_colors.dart';
 import 'add_event_form.dart';
 
-class CalendarConfig extends StatefulWidget {
+class CalendarConfig extends StatelessWidget {
   final void Function(CalendarView view) onViewChange;
-  final void Function(bool)? onThemeChange;
   final CalendarView currentView;
 
   const CalendarConfig({
     super.key,
     required this.onViewChange,
-    this.onThemeChange,
     this.currentView = CalendarView.month,
   });
 
   @override
-  State<CalendarConfig> createState() => _CalendarConfigState();
-}
-
-class _CalendarConfigState extends State<CalendarConfig> {
-  bool isDarkMode = false;
-
-  @override
   Widget build(BuildContext context) {
-    final color = Theme.of(context).colorScheme;
-
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,7 +27,7 @@ class _CalendarConfigState extends State<CalendarConfig> {
           child: Text(
             "Flutter Calendar Page",
             style: TextStyle(
-              color: color.onSurface,
+              color: AppColors.black,
               fontSize: 30,
             ),
           ),
@@ -53,32 +42,11 @@ class _CalendarConfigState extends State<CalendarConfig> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      'Dark mode: ',
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        color: color.onSurface,
-                      ),
-                    ),
-                    Switch(
-                      value: isDarkMode,
-                      onChanged: (value) {
-                        setState(() => isDarkMode = value);
-                        if (widget.onThemeChange != null) {
-                          widget.onThemeChange!(isDarkMode);
-                        }
-                      },
-                    ),
-                  ],
-                ),
                 Text(
                   "Active View:",
                   style: TextStyle(
                     fontSize: 20.0,
-                    color: Theme.of(context).colorScheme.onSurface,
+                    color: AppColors.black,
                   ),
                 ),
                 Wrap(
@@ -87,7 +55,7 @@ class _CalendarConfigState extends State<CalendarConfig> {
                     (index) {
                       final view = CalendarView.values[index];
                       return GestureDetector(
-                        onTap: () => widget.onViewChange(view),
+                        onTap: () => onViewChange(view),
                         child: Container(
                           padding: EdgeInsets.symmetric(
                             vertical: 10,
@@ -99,14 +67,14 @@ class _CalendarConfigState extends State<CalendarConfig> {
                           ),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(7),
-                            color: view == widget.currentView
+                            color: view == currentView
                                 ? AppColors.navyBlue
                                 : AppColors.bluishGrey,
                           ),
                           child: Text(
                             view.name.capitalized,
                             style: TextStyle(
-                              color: view == widget.currentView
+                              color: view == currentView
                                   ? AppColors.white
                                   : AppColors.black,
                               fontSize: 17,
@@ -124,7 +92,7 @@ class _CalendarConfigState extends State<CalendarConfig> {
                   "Add Event: ",
                   style: TextStyle(
                     fontSize: 20.0,
-                    color: color.onSurface,
+                    color: AppColors.black,
                   ),
                 ),
                 SizedBox(

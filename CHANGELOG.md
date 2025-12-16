@@ -1,29 +1,3 @@
-# [2.0.0 - 25 Jun 2025](https://github.com/SimformSolutionsPvtLtd/flutter_calendar_view/tree/2.0.0)
-
-- Added clear method to `EventController`.
-- Added `onEventTapDetails`, `onEventDoubleTapDetails` & `onEventLongTapDetails` gesture recognizers
-  to get tap
-  details. [#390](https://github.com/SimformSolutionsPvtLtd/flutter_calendar_view/issues/390)
-- Fixed `hourLinePainter` has no effect in `DayView` and
-  `WeekView`. [#461](https://github.com/SimformSolutionsPvtLtd/flutter_calendar_view/issues/461)
-- Fixed `onEventTap` in `MonthView` to ignore when it is
-  null. [#278](https://github.com/SimformSolutionsPvtLtd/flutter_calendar_view/issues/278)
-- Fixed Splash issue on timeline in `WeekView` and `DayView` when `onTimestampTap` is
-  null. [#459](https://github.com/SimformSolutionsPvtLtd/flutter_calendar_view/issues/459)
-- Fixed recurring event not properly working in
-  example. [#473](https://github.com/SimformSolutionsPvtLtd/flutter_calendar_view/pull/473)
-- Added multi day event
-  support. [#333](https://github.com/SimformSolutionsPvtLtd/flutter_calendar_view/issues/333)
-- Added support for custom time provider in live time
-  indicator. [#460](https://github.com/SimformSolutionsPvtLtd/flutter_calendar_view/issues/460)
-- Fixed example app to run on flutter
-  v3.32.4. [#478](https://github.com/SimformSolutionsPvtLtd/flutter_calendar_view/pull/478)
-- Updated `README.md` to use documentation
-  website. [#469](https://github.com/SimformSolutionsPvtLtd/flutter_calendar_view/pull/469)
-- Fixed resizing the window automatically scrolls the page to the top in 
-  example app. [#480](https://github.com/SimformSolutionsPvtLtd/flutter_calendar_view/issues/480)
-- Adds support for dark theme. [#263](https://github.com/SimformSolutionsPvtLtd/flutter_calendar_view/issues/263)
-
 # [1.4.0 - 7 Jan 2025](https://github.com/SimformSolutionsPvtLtd/flutter_calendar_view/tree/1.4.0)
 
 - Adds `showWeekends` flag in month view to hide & show weekends view. 

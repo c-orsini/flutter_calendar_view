@@ -7,11 +7,9 @@ import '../../widgets/calendar_views.dart';
 class WebHomePage extends StatefulWidget {
   WebHomePage({
     this.selectedView = CalendarView.month,
-    this.onThemeChange,
   });
 
   final CalendarView selectedView;
-  final void Function(bool)? onThemeChange;
 
   @override
   _WebHomePageState createState() => _WebHomePageState();
@@ -37,7 +35,6 @@ class _WebHomePageState extends State<WebHomePage> {
             child: CalendarConfig(
               onViewChange: _setView,
               currentView: _selectedView,
-              onThemeChange: widget.onThemeChange,
             ),
           ),
           Expanded(
@@ -47,6 +44,7 @@ class _WebHomePageState extends State<WebHomePage> {
                     MediaQuery.of(context).size.height),
               ),
               child: CalendarViews(
+                key: ValueKey(MediaQuery.of(context).size.width),
                 view: _selectedView,
               ),
             ),

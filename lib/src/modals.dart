@@ -53,7 +53,7 @@ class LiveTimeIndicatorSettings {
   /// Flag to show time on live time line.
   final bool showTime;
 
-  /// Flag to show time background view.
+  /// Flag to show time backgroud view.
   final bool showTimeBackgroundView;
 
   /// Radius of bullet.
@@ -61,23 +61,6 @@ class LiveTimeIndicatorSettings {
 
   /// Width of time backgroud view.
   final double timeBackgroundViewWidth;
-
-  /// Function that provides the DateTime to be used for the live time indicator.
-  ///
-  /// If not provided, [DateTime.now] will be used as the default behavior.
-  ///
-  /// Example usage:
-  /// ```dart
-  /// // Show time for New York timezone (UTC-4)
-  /// currentTimeProvider: () {
-  ///   final utcNow = DateTime.now().toUtc();
-  ///   return utcNow.subtract(Duration(hours: 4));
-  /// }
-  /// ```
-  final DateTime Function()? currentTimeProvider;
-
-  /// Flag to show only today's events.
-  final bool onlyShowToday;
 
   /// Settings for live time line
   const LiveTimeIndicatorSettings({
@@ -90,8 +73,6 @@ class LiveTimeIndicatorSettings {
     this.showTimeBackgroundView = false,
     this.bulletRadius = 5.0,
     this.timeBackgroundViewWidth = 60.0,
-    this.currentTimeProvider,
-    this.onlyShowToday = false,
   }) : assert(height >= 0, "Height must be greater than or equal to 0.");
 
   factory LiveTimeIndicatorSettings.none() => LiveTimeIndicatorSettings(
